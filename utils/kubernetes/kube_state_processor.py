@@ -80,21 +80,21 @@ class KubeStateProcessor:
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
-    def kube_node_status_allocateable_cpu_cores(self, message, **kwargs):
+    def kube_node_status_allocatable_cpu_cores(self, message, **kwargs):
         metric_name = 'kubernetes.node.cpu_allocatable'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
-    def kube_node_status_allocateable_memory_bytes(self, message, **kwargs):
+    def kube_node_status_allocatable_memory_bytes(self, message, **kwargs):
         metric_name = 'kubernetes.node.memory_allocatable'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
-    def kube_node_status_allocateable_pods(self, message, **kwargs):
+    def kube_node_status_allocatable_pods(self, message, **kwargs):
         metric_name = 'kubernetes.node.pods_allocatable'
         for metric in message.metric:
             val = metric.gauge.value
