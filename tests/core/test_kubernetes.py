@@ -116,8 +116,8 @@ class TestKubeStateProcessor(unittest.TestCase):
             self.assertEqual(args[1:], expected[i])  # skip the first call arg, it's the `self`
 
     def test_kube_node_status_allocateable_cpu_cores(self):
-        msg = self.messages['kube_node_status_allocateable_cpu_cores']
-        self.processor.kube_node_status_allocateable_cpu_cores(msg)
+        msg = self.messages['kube_node_status_allocatable_cpu_cores']
+        self.processor.kube_node_status_allocatable_cpu_cores(msg)
 
         expected = [
             ('kubernetes.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
@@ -132,8 +132,8 @@ class TestKubeStateProcessor(unittest.TestCase):
             self.assertEqual(args[1:], expected[i])  # skip the first call arg, it's the `self`
 
     def test_kube_node_status_allocateable_memory_bytes(self):
-        msg = self.messages['kube_node_status_allocateable_memory_bytes']
-        self.processor.kube_node_status_allocateable_memory_bytes(msg)
+        msg = self.messages['kube_node_status_allocatable_memory_bytes']
+        self.processor.kube_node_status_allocatable_memory_bytes(msg)
 
         expected = [
             ('kubernetes.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
@@ -148,8 +148,8 @@ class TestKubeStateProcessor(unittest.TestCase):
             self.assertEqual(args[1:], expected[i])  # skip the first call arg, it's the `self`
 
     def test_kube_node_status_allocateable_pods(self):
-        msg = self.messages['kube_node_status_allocateable_pods']
-        self.processor.kube_node_status_allocateable_pods(msg)
+        msg = self.messages['kube_node_status_allocatable_pods']
+        self.processor.kube_node_status_allocatable_pods(msg)
 
         expected = [
             ('kubernetes.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
@@ -169,7 +169,7 @@ class TestKubeStateProcessor(unittest.TestCase):
 
         expected = [
             ('kubernetes.deployment.replicas_available', 1.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
-            ('kubernetes.deployment.replicas_available', 0.0, ['deployment:hello-node', 'namespace:default']),
+            ('kubernetes.deployment.replicas_available', 1.0, ['deployment:hello-node', 'namespace:default']),
             ('kubernetes.deployment.replicas_available', 1.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
         ]
 
@@ -201,7 +201,7 @@ class TestKubeStateProcessor(unittest.TestCase):
 
         expected = [
             ('kubernetes.deployment.replicas_updated', 1.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
-            ('kubernetes.deployment.replicas_updated', 0.0, ['deployment:hello-node', 'namespace:default']),
+            ('kubernetes.deployment.replicas_updated', 1.0, ['deployment:hello-node', 'namespace:default']),
             ('kubernetes.deployment.replicas_updated', 1.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
         ]
 
@@ -217,7 +217,7 @@ class TestKubeStateProcessor(unittest.TestCase):
 
         expected = [
             ('kubernetes.deployment.replicas_desired', 1.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
-            ('kubernetes.deployment.replicas_desired', 0.0, ['deployment:hello-node', 'namespace:default']),
+            ('kubernetes.deployment.replicas_desired', 1.0, ['deployment:hello-node', 'namespace:default']),
             ('kubernetes.deployment.replicas_desired', 1.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
         ]
 
