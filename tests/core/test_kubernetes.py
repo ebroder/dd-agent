@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from utils.kubernetes import KubeStateProcessor
+from utils.kubernetes import KubeStateProcessor, NAMESPACE
 from utils.prometheus import parse_metric_family
 
 import mock
@@ -72,9 +72,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_capacity_cpu_cores(msg)
 
         expected = [
-            ('kubernetes.node.cpu_capacity', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            ('kubernetes.node.cpu_capacity', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            ('kubernetes.node.cpu_capacity', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.cpu_capacity', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.cpu_capacity', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.cpu_capacity', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -88,9 +88,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_capacity_memory_bytes(msg)
 
         expected = [
-            ('kubernetes.node.memory_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            ('kubernetes.node.memory_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            ('kubernetes.node.memory_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.memory_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.memory_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.memory_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -104,9 +104,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_capacity_pods(msg)
 
         expected = [
-            ('kubernetes.node.pods_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            ('kubernetes.node.pods_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            ('kubernetes.node.pods_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.pods_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.pods_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.pods_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -120,9 +120,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_allocatable_cpu_cores(msg)
 
         expected = [
-            ('kubernetes.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            ('kubernetes.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            ('kubernetes.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -136,9 +136,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_allocatable_memory_bytes(msg)
 
         expected = [
-            ('kubernetes.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            ('kubernetes.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            ('kubernetes.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -152,9 +152,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_allocatable_pods(msg)
 
         expected = [
-            ('kubernetes.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            ('kubernetes.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            ('kubernetes.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -168,9 +168,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_deployment_status_replicas_available(msg)
 
         expected = [
-            ('kubernetes.deployment.replicas_available', 1.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
-            ('kubernetes.deployment.replicas_available', 1.0, ['deployment:hello-node', 'namespace:default']),
-            ('kubernetes.deployment.replicas_available', 1.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
+            (NAMESPACE + '.deployment.replicas_available', 1.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
+            (NAMESPACE + '.deployment.replicas_available', 1.0, ['deployment:hello-node', 'namespace:default']),
+            (NAMESPACE + '.deployment.replicas_available', 1.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -184,9 +184,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_deployment_status_replicas_unavailable(msg)
 
         expected = [
-            ('kubernetes.deployment.replicas_unavailable', 0.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
-            ('kubernetes.deployment.replicas_unavailable', 0.0, ['deployment:hello-node', 'namespace:default']),
-            ('kubernetes.deployment.replicas_unavailable', 0.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
+            (NAMESPACE + '.deployment.replicas_unavailable', 0.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
+            (NAMESPACE + '.deployment.replicas_unavailable', 0.0, ['deployment:hello-node', 'namespace:default']),
+            (NAMESPACE + '.deployment.replicas_unavailable', 0.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -200,9 +200,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_deployment_status_replicas_updated(msg)
 
         expected = [
-            ('kubernetes.deployment.replicas_updated', 1.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
-            ('kubernetes.deployment.replicas_updated', 1.0, ['deployment:hello-node', 'namespace:default']),
-            ('kubernetes.deployment.replicas_updated', 1.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
+            (NAMESPACE + '.deployment.replicas_updated', 1.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
+            (NAMESPACE + '.deployment.replicas_updated', 1.0, ['deployment:hello-node', 'namespace:default']),
+            (NAMESPACE + '.deployment.replicas_updated', 1.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -216,9 +216,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_deployment_spec_replicas(msg)
 
         expected = [
-            ('kubernetes.deployment.replicas_desired', 1.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
-            ('kubernetes.deployment.replicas_desired', 1.0, ['deployment:hello-node', 'namespace:default']),
-            ('kubernetes.deployment.replicas_desired', 1.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
+            (NAMESPACE + '.deployment.replicas_desired', 1.0, ['deployment:heapster-v1.1.0', 'namespace:kube-system']),
+            (NAMESPACE + '.deployment.replicas_desired', 1.0, ['deployment:hello-node', 'namespace:default']),
+            (NAMESPACE + '.deployment.replicas_desired', 1.0, ['deployment:kube-state-metrics-deployment', 'namespace:default']),
         ]
 
         calls = self.check.publish_gauge.mock_calls

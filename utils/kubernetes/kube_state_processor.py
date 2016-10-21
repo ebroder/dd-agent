@@ -1,6 +1,9 @@
 from functools import partial
 
 
+NAMESPACE = 'kubernetes.state'
+
+
 class KubeStateProcessor:
     def __init__(self, kubernetes_check):
         self.kube_check = kubernetes_check
@@ -60,70 +63,70 @@ class KubeStateProcessor:
         return None
 
     def kube_node_status_capacity_cpu_cores(self, message, **kwargs):
-        metric_name = 'kubernetes.node.cpu_capacity'
+        metric_name = NAMESPACE + '.node.cpu_capacity'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['host:{}'.format(metric.label[0].value)]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_capacity_memory_bytes(self, message, **kwargs):
-        metric_name = 'kubernetes.node.memory_capacity'
+        metric_name = NAMESPACE + '.node.memory_capacity'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_capacity_pods(self, message, **kwargs):
-        metric_name = 'kubernetes.node.pods_capacity'
+        metric_name = NAMESPACE + '.node.pods_capacity'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_allocatable_cpu_cores(self, message, **kwargs):
-        metric_name = 'kubernetes.node.cpu_allocatable'
+        metric_name = NAMESPACE + '.node.cpu_allocatable'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_allocatable_memory_bytes(self, message, **kwargs):
-        metric_name = 'kubernetes.node.memory_allocatable'
+        metric_name = NAMESPACE + '.node.memory_allocatable'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_allocatable_pods(self, message, **kwargs):
-        metric_name = 'kubernetes.node.pods_allocatable'
+        metric_name = NAMESPACE + '.node.pods_allocatable'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_deployment_status_replicas_available(self, message, **kwargs):
-        metric_name = 'kubernetes.deployment.replicas_available'
+        metric_name = NAMESPACE + '.deployment.replicas_available'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['{}:{}'.format(label.name, label.value) for label in metric.label]
             self.gauge(metric_name, val, tags)
 
     def kube_deployment_status_replicas_unavailable(self, message, **kwargs):
-        metric_name = 'kubernetes.deployment.replicas_unavailable'
+        metric_name = NAMESPACE + '.deployment.replicas_unavailable'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['{}:{}'.format(label.name, label.value) for label in metric.label]
             self.gauge(metric_name, val, tags)
 
     def kube_deployment_status_replicas_updated(self, message, **kwargs):
-        metric_name = 'kubernetes.deployment.replicas_updated'
+        metric_name = NAMESPACE + '.deployment.replicas_updated'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['{}:{}'.format(label.name, label.value) for label in metric.label]
             self.gauge(metric_name, val, tags)
 
     def kube_deployment_spec_replicas(self, message, **kwargs):
-        metric_name = 'kubernetes.deployment.replicas_desired'
+        metric_name = NAMESPACE + '.deployment.replicas_desired'
         for metric in message.metric:
             val = metric.gauge.value
             tags = ['{}:{}'.format(label.name, label.value) for label in metric.label]

@@ -14,6 +14,7 @@ from tests.checks.common import AgentCheckTest, Fixtures
 from checks import AgentCheck
 from utils.kubeutil import KubeUtil
 from utils.platform import Platform
+from utils.kubernetes import NAMESPACE
 
 CPU = "CPU"
 MEM = "MEM"
@@ -359,15 +360,15 @@ class TestKubernetes(AgentCheckTest):
         self.assertServiceCheck('kube_node_status_out_of_disk', self.check.OK)
         self.assertServiceCheck('kube_pod_status_ready', self.check.OK, tags=['namespace:default', 'pod:dd-agent'])
 
-        self.assertMetric('kubernetes.node.cpu_capacity')
-        self.assertMetric('kubernetes.node.memory_capacity')
-        self.assertMetric('kubernetes.node.pods_capacity')
-        self.assertMetric('kubernetes.node.cpu_allocatable')
-        self.assertMetric('kubernetes.node.memory_allocatable')
-        self.assertMetric('kubernetes.node.pods_allocatable')
-        self.assertMetric('kubernetes.deployment.replicas_available')
-        self.assertMetric('kubernetes.deployment.replicas_unavailable')
-        self.assertMetric('kubernetes.deployment.replicas_desired')
+        self.assertMetric('kubernetes.state.node.cpu_capacity')
+        self.assertMetric('kubernetes.state.node.memory_capacity')
+        self.assertMetric('kubernetes.state.node.pods_capacity')
+        self.assertMetric('kubernetes.state.node.cpu_allocatable')
+        self.assertMetric('kubernetes.state.node.memory_allocatable')
+        self.assertMetric('kubernetes.state.node.pods_allocatable')
+        self.assertMetric('kubernetes.state.deployment.replicas_available')
+        self.assertMetric('kubernetes.state.deployment.replicas_unavailable')
+        self.assertMetric('kubernetes.state.deployment.replicas_desired')
 
 
 class TestKubeutil(unittest.TestCase):
