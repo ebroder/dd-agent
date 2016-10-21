@@ -9,7 +9,7 @@ class TestPrometheusFuncs(unittest.TestCase):
         f_name = os.path.join(os.path.dirname(__file__), 'fixtures', 'prometheus', 'protobuf.bin')
         with open(f_name, 'rb') as f:
             data = f.read()
-            self.assertEqual(len(data), 38347)
+            self.assertEqual(len(data), 51855)
             messages = list(parse_metric_family(data))
-            self.assertEqual(len(messages), 56)
+            self.assertEqual(len(messages), 61)
             self.assertEqual(messages[-1].name, 'process_virtual_memory_bytes')
