@@ -322,28 +322,16 @@ class TestKubernetes(AgentCheckTest):
         self.run_check(config, force_reload=True, mocks=mocks)
         mocked.assert_called_once()
 
-    def test__get_kube_state(self):
-        config = {'instances': [{'host': 'foo'}]}
-        headers = {
-            'accept': 'application/vnd.google.protobuf; proto=io.prometheus.client.MetricFamily; encoding=delimited',
-            'accept-encoding': 'gzip',
-        }
-        url = 'https://example.com'
-        self.load_check(config)
-        with mock.patch('{}.requests'.format(self.check.__module__)) as r:
-            self.check._get_kube_state(url)
-            r.get.assert_called_once_with(url, headers=headers)
-
     def test__update_kube_state_metrics(self):
         f_name = os.path.join(os.path.dirname(__file__), '..', '..', 'core', 'fixtures', 'prometheus', 'protobuf.bin')
         f = open(f_name, 'rb')
-        mocked = mock.MagicMock(return_value=f.read())
+        mocked = mock.MagicMock()
+        mocked.get_kube_state.return_value = f.read()
 
         mocks = {
             '_perform_kubelet_checks': mock.MagicMock(),
             '_update_metrics': mock.MagicMock(),
-            'kubeutil': mock.MagicMock(),
-            '_get_kube_state': mocked,
+            'kubeutil': mocked,
         }
 
         config = {
@@ -527,3 +515,14 @@ class TestKubeutil(unittest.TestCase):
             self.assertIn('object_type', tag_names)
             if len(tags) == 4:
                 self.assertIn('node_name', tag_names)
+    def test_get_kube_state(self):
+        config = {'instances': [{'host': 'foo'}]}
+        headers = {
+            'accept': 'application/vnd.google.protobuf; proto=io.prometheus.client.MetricFamily; encoding=delimited',
+            'accept-encoding': 'gzip',
+        }
+        url = 'https://example.com'
+        self.load_check(config)
+        with mock.patch('{}.requests'.format(self.check.__module__)) as r:
+            self.check.kubeutil.get_kube_state(url)
+            r.get.assert_called_once_with(url, headers=headers)

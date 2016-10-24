@@ -232,3 +232,15 @@ class KubeUtil:
             log.error('Unable to read token from {}: {}'.format(cls.AUTH_TOKEN_PATH, e))
 
         return None
+
+    @classmethod
+    def get_kube_state(cls, endpoint):
+        """
+        Get metrics from the Kube State API using the protobuf format.
+        """
+        headers = {
+            'accept': 'application/vnd.google.protobuf; proto=io.prometheus.client.MetricFamily; encoding=delimited',
+            'accept-encoding': 'gzip',
+        }
+        r = requests.get(endpoint, headers=headers)
+        return r.content

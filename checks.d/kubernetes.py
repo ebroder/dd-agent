@@ -463,7 +463,7 @@ class Kubernetes(AgentCheck):
         Datadog metrics.
         """
         try:
-            payload = self._get_kube_state(self.kube_state_url)
+            payload = self.kubeutil.get_kube_state(self.kube_state_url)
             msg = "Got a payload of size {} from Kube State API at url:{}".format(len(payload), self.kube_state_url)
             self.log.debug(msg)
             for metric in parse_metric_family(payload):
@@ -471,14 +471,3 @@ class Kubernetes(AgentCheck):
 
         except Exception as e:
             self.log.error("Unable to retrieve metrics from Kube State API: {}".format(e))
-
-    def _get_kube_state(self, endpoint):
-        """
-        Get metrics from the Kube State API using the protobuf format.
-        """
-        headers = {
-            'accept': 'application/vnd.google.protobuf; proto=io.prometheus.client.MetricFamily; encoding=delimited',
-            'accept-encoding': 'gzip',
-        }
-        r = requests.get(endpoint, headers=headers)
-        return r.content

@@ -66,42 +66,42 @@ class KubeStateProcessor:
         metric_name = NAMESPACE + '.node.cpu_capacity'
         for metric in message.metric:
             val = metric.gauge.value
-            tags = ['host:{}'.format(metric.label[0].value)]
+            tags = ['node:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_capacity_memory_bytes(self, message, **kwargs):
         metric_name = NAMESPACE + '.node.memory_capacity'
         for metric in message.metric:
             val = metric.gauge.value
-            tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
+            tags = ['node:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_capacity_pods(self, message, **kwargs):
         metric_name = NAMESPACE + '.node.pods_capacity'
         for metric in message.metric:
             val = metric.gauge.value
-            tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
+            tags = ['node:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_allocatable_cpu_cores(self, message, **kwargs):
         metric_name = NAMESPACE + '.node.cpu_allocatable'
         for metric in message.metric:
             val = metric.gauge.value
-            tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
+            tags = ['node:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_allocatable_memory_bytes(self, message, **kwargs):
         metric_name = NAMESPACE + '.node.memory_allocatable'
         for metric in message.metric:
             val = metric.gauge.value
-            tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
+            tags = ['node:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_allocatable_pods(self, message, **kwargs):
         metric_name = NAMESPACE + '.node.pods_allocatable'
         for metric in message.metric:
             val = metric.gauge.value
-            tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
+            tags = ['node:{}'.format(self._extract_label_value("node", metric.label))]
             self.gauge(metric_name, val, tags)
 
     def kube_deployment_status_replicas_available(self, message, **kwargs):
@@ -133,7 +133,7 @@ class KubeStateProcessor:
             self.gauge(metric_name, val, tags)
 
     def kube_node_status_ready(self, message, **kwargs):
-        service_check_name = 'kube_node_status_ready'
+        service_check_name = NAMESPACE + '.node.ready'
         for metric in message.metric:
             name, val = self._eval_metric_condition(metric)
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
@@ -145,7 +145,7 @@ class KubeStateProcessor:
                 self.kube_check.service_check(service_check_name, self.kube_check.UNKNOWN, tags=tags)
 
     def kube_node_status_out_of_disk(self, message, **kwargs):
-        service_check_name = 'kube_node_status_out_of_disk'
+        service_check_name = NAMESPACE + '.node.out_of_disk'
         for metric in message.metric:
             name, val = self._eval_metric_condition(metric)
             tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
@@ -161,7 +161,7 @@ class KubeStateProcessor:
         We only send service checks for those pods explicitly listed in the
         configuration file.
         """
-        service_check_name = 'kube_pod_status_ready'
+        service_check_name = NAMESPACE + '.pod.ready'
         configured_pods = kwargs.get('instance', {}).get('status_ready_for_pods')
         if configured_pods is None:
             self.log.debug('no pods configured, kube_pod_status_ready has nothing to do, returning...')

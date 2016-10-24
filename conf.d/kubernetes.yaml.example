@@ -46,6 +46,9 @@ instances:
 
   # Kube State API
   #
+  # To enable Kube State metrics you must specify the url exposing the API
+  # kube_state_url: http://example.com:8080/metrics
+  #
   # Provide a service check monitoring whether the listed pods are ready to serve requests.
   # status_ready_for_pods:
   #   - pod_name_1
