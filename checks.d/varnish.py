@@ -9,7 +9,7 @@ import xml.parsers.expat # python 2.4 compatible
 
 # project
 from checks import AgentCheck
-from utils.subprocess_output import get_subprocess_output
+from utils.subprocess_output import get_subprocess_output, SubprocessOutputEmptyError
 
 
 class BackendStatus(object):
@@ -107,7 +107,11 @@ class Varnish(AgentCheck):
 
     def _get_version_info(self, varnishstat_path):
         # Get the varnish version from varnishstat
-        output, error, _ = get_subprocess_output([varnishstat_path, "-V"], self.log)
+        try:
+            output, error, _ = get_subprocess_output([varnishstat_path, "-V"], self.log)
+        except SubprocessOutputEmptyError:
+            # this is expected on some versions of Varnish
+            pass
 
         # Assumptions regarding varnish's version
         use_xml = True
