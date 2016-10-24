@@ -360,15 +360,15 @@ class TestKubernetes(AgentCheckTest):
         self.assertServiceCheck('kube_node_status_out_of_disk', self.check.OK)
         self.assertServiceCheck('kube_pod_status_ready', self.check.OK, tags=['namespace:default', 'pod:dd-agent'])
 
-        self.assertMetric('kubernetes.state.node.cpu_capacity')
-        self.assertMetric('kubernetes.state.node.memory_capacity')
-        self.assertMetric('kubernetes.state.node.pods_capacity')
-        self.assertMetric('kubernetes.state.node.cpu_allocatable')
-        self.assertMetric('kubernetes.state.node.memory_allocatable')
-        self.assertMetric('kubernetes.state.node.pods_allocatable')
-        self.assertMetric('kubernetes.state.deployment.replicas_available')
-        self.assertMetric('kubernetes.state.deployment.replicas_unavailable')
-        self.assertMetric('kubernetes.state.deployment.replicas_desired')
+        self.assertMetric(NAMESPACE + '.node.cpu_capacity')
+        self.assertMetric(NAMESPACE + '.node.memory_capacity')
+        self.assertMetric(NAMESPACE + '.node.pods_capacity')
+        self.assertMetric(NAMESPACE + '.node.cpu_allocatable')
+        self.assertMetric(NAMESPACE + '.node.memory_allocatable')
+        self.assertMetric(NAMESPACE + '.node.pods_allocatable')
+        self.assertMetric(NAMESPACE + '.deployment.replicas_available')
+        self.assertMetric(NAMESPACE + '.deployment.replicas_unavailable')
+        self.assertMetric(NAMESPACE + '.deployment.replicas_desired')
 
 
 class TestKubeutil(unittest.TestCase):
