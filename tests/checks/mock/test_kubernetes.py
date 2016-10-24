@@ -516,14 +516,12 @@ class TestKubeutil(unittest.TestCase):
             if len(tags) == 4:
                 self.assertIn('node_name', tag_names)
 
-    def test_get_kube_state(self):
-        config = {'instances': [{'host': 'foo'}]}
+    @mock.patch('utils.kubeutil.requests')
+    def test_get_kube_state(self, r):
         headers = {
             'accept': 'application/vnd.google.protobuf; proto=io.prometheus.client.MetricFamily; encoding=delimited',
             'accept-encoding': 'gzip',
         }
         url = 'https://example.com'
-        self.load_check(config)
-        with mock.patch('{}.requests'.format(self.check.__module__)) as r:
-            self.check.kubeutil.get_kube_state(url)
-            r.get.assert_called_once_with(url, headers=headers)
+        KubeUtil.get_kube_state(url)
+        r.get.assert_called_once_with(url, headers=headers)
