@@ -344,9 +344,9 @@ class TestKubernetes(AgentCheckTest):
 
         self.run_check(config, mocks=mocks)
 
-        self.assertServiceCheck('kube_node_status_ready', self.check.OK)
-        self.assertServiceCheck('kube_node_status_out_of_disk', self.check.OK)
-        self.assertServiceCheck('kube_pod_status_ready', self.check.OK, tags=['namespace:default', 'pod:dd-agent'])
+        self.assertServiceCheck(NAMESPACE + '.node.ready', self.check.OK)
+        self.assertServiceCheck(NAMESPACE + '.node.out_of_disk', self.check.OK)
+        self.assertServiceCheck(NAMESPACE + '.pod.ready', self.check.OK, tags=['namespace:default', 'pod:dd-agent'])
 
         self.assertMetric(NAMESPACE + '.node.cpu_capacity')
         self.assertMetric(NAMESPACE + '.node.memory_capacity')

@@ -136,7 +136,7 @@ class KubeStateProcessor:
         service_check_name = NAMESPACE + '.node.ready'
         for metric in message.metric:
             name, val = self._eval_metric_condition(metric)
-            tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
+            tags = ['node:{}'.format(self._extract_label_value("node", metric.label))]
             if name == 'true' and val:
                 self.kube_check.service_check(service_check_name, self.kube_check.OK, tags=tags)
             elif name == 'false' and val:
@@ -148,7 +148,7 @@ class KubeStateProcessor:
         service_check_name = NAMESPACE + '.node.out_of_disk'
         for metric in message.metric:
             name, val = self._eval_metric_condition(metric)
-            tags = ['host:{}'.format(self._extract_label_value("node", metric.label))]
+            tags = ['node:{}'.format(self._extract_label_value("node", metric.label))]
             if name == 'true' and val:
                 self.kube_check.service_check(service_check_name, self.kube_check.CRITICAL, tags=tags)
             elif name == 'false' and val:

@@ -72,9 +72,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_capacity_cpu_cores(msg)
 
         expected = [
-            (NAMESPACE + '.node.cpu_capacity', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            (NAMESPACE + '.node.cpu_capacity', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            (NAMESPACE + '.node.cpu_capacity', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.cpu_capacity', 1.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.cpu_capacity', 1.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.cpu_capacity', 1.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -88,9 +88,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_capacity_memory_bytes(msg)
 
         expected = [
-            (NAMESPACE + '.node.memory_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            (NAMESPACE + '.node.memory_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            (NAMESPACE + '.node.memory_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.memory_capacity', 3892240384.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.memory_capacity', 3892240384.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.memory_capacity', 3892240384.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -104,9 +104,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_capacity_pods(msg)
 
         expected = [
-            (NAMESPACE + '.node.pods_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            (NAMESPACE + '.node.pods_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            (NAMESPACE + '.node.pods_capacity', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.pods_capacity', 3892240384.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.pods_capacity', 3892240384.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.pods_capacity', 3892240384.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -120,9 +120,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_allocatable_cpu_cores(msg)
 
         expected = [
-            (NAMESPACE + '.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            (NAMESPACE + '.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            (NAMESPACE + '.node.cpu_allocatable', 1.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.cpu_allocatable', 1.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.cpu_allocatable', 1.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.cpu_allocatable', 1.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -136,9 +136,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_allocatable_memory_bytes(msg)
 
         expected = [
-            (NAMESPACE + '.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            (NAMESPACE + '.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            (NAMESPACE + '.node.memory_allocatable', 3892240384.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.memory_allocatable', 3892240384.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.memory_allocatable', 3892240384.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.memory_allocatable', 3892240384.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -152,9 +152,9 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_allocatable_pods(msg)
 
         expected = [
-            (NAMESPACE + '.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
-            (NAMESPACE + '.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
-            (NAMESPACE + '.node.pods_allocatable', 110.0, ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
+            (NAMESPACE + '.node.pods_allocatable', 110.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa']),
+            (NAMESPACE + '.node.pods_allocatable', 110.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-aah4']),
+            (NAMESPACE + '.node.pods_allocatable', 110.0, ['node:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk']),
         ]
 
         calls = self.check.publish_gauge.mock_calls
@@ -232,16 +232,16 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_ready(msg)
 
         expected = [
-            ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa'],
-            ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4'],
-            ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk'],
+            ['node:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa'],
+            ['node:gke-cluster-massi-agent59-default-pool-6087cc76-aah4'],
+            ['node:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk'],
         ]
 
         calls = self.check.service_check.mock_calls
         self.assertEqual(len(calls), 3)
         for i, call in enumerate(calls):
             args, kwargs = call[1], call[2]
-            self.assertEqual(args[0], 'kube_node_status_ready')
+            self.assertEqual(args[0], NAMESPACE + '.node.ready')
             self.assertEqual(args[1], self.processor.kube_check.OK)
             self.assertEqual(kwargs['tags'], expected[i])
 
@@ -250,16 +250,16 @@ class TestKubeStateProcessor(unittest.TestCase):
         self.processor.kube_node_status_out_of_disk(msg)
 
         expected = [
-            ['host:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa'],
-            ['host:gke-cluster-massi-agent59-default-pool-6087cc76-aah4'],
-            ['host:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk'],
+            ['node:gke-cluster-massi-agent59-default-pool-6087cc76-9cfa'],
+            ['node:gke-cluster-massi-agent59-default-pool-6087cc76-aah4'],
+            ['node:gke-cluster-massi-agent59-default-pool-6087cc76-fgnk'],
         ]
 
         calls = self.check.service_check.mock_calls
         self.assertEqual(len(calls), 3)
         for i, call in enumerate(calls):
             args, kwargs = call[1], call[2]
-            self.assertEqual(args[0], 'kube_node_status_out_of_disk')
+            self.assertEqual(args[0], NAMESPACE + '.node.out_of_disk')
             self.assertEqual(args[1], self.processor.kube_check.OK)
             self.assertEqual(kwargs['tags'], expected[i])
 
@@ -294,5 +294,5 @@ class TestKubeStateProcessor(unittest.TestCase):
         calls = self.check.service_check.mock_calls
         self.assertEqual(len(calls), 1)
         args, kwargs = calls[0][1], calls[0][2]
-        self.assertEqual(args, ('kube_pod_status_ready', self.processor.kube_check.OK))
+        self.assertEqual(args, (NAMESPACE + '.pod.ready', self.processor.kube_check.OK))
         self.assertEqual(kwargs['tags'], ['namespace:default', 'pod:dd-agent'])
