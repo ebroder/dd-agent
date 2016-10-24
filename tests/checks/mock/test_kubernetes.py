@@ -515,6 +515,7 @@ class TestKubeutil(unittest.TestCase):
             self.assertIn('object_type', tag_names)
             if len(tags) == 4:
                 self.assertIn('node_name', tag_names)
+
     def test_get_kube_state(self):
         config = {'instances': [{'host': 'foo'}]}
         headers = {
